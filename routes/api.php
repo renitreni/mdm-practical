@@ -29,7 +29,7 @@ Route::middleware('api')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class)->only(['index']);
-    Route::apiResource('groups', GroupController::class)->only(['index', 'store', 'destroy']);
+    Route::apiResource('groups', GroupController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::apiResource('vouchers', VoucherController::class)->only(['index', 'store', 'destroy']);
     Route::apiResource('my-group', MyGroupController::class)->only(['index']);
 

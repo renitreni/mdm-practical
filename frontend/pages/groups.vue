@@ -113,7 +113,8 @@ definePageMeta({
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="store">Save</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-if="!overview.owner_id" @click="store">Save</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-else @click="update">Update</button>
                     </div>
                 </div>
             </div>
@@ -155,6 +156,18 @@ export default {
             let $this = this;
             axios.post(
                 this.runtimeConfig.public.baseUrl + '/api/groups',
+                $this.overview,
+                { headers: { Authorization: `Bearer ${useCookie('bearer_token').value}` } }
+            ).then(function (value) {
+                $this.getGroups()
+                $this.getGroupAdmins()
+                $this.getUserList()
+            });
+        },
+        update() {
+            let $this = this;
+            axios.put(
+                this.runtimeConfig.public.baseUrl + '/api/groups/' + this.overview.group_id,
                 $this.overview,
                 { headers: { Authorization: `Bearer ${useCookie('bearer_token').value}` } }
             ).then(function (value) {

@@ -6,6 +6,7 @@ use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignMember;
 use App\Http\Requests\GroupStoreRequest;
+use App\Http\Requests\GroupUpdateRequest;
 use App\Http\Resources\GroupResource;
 use App\Http\Resources\MemberResource;
 use App\Models\Group;
@@ -41,6 +42,16 @@ class GroupController extends Controller
     public function store(GroupStoreRequest $request)
     {
         Group::create([
+            'group_name' => $request->get('group_name'),
+            'owner_id' => $request->get('owner_id'),
+        ]);
+
+        return response()->json(['message' => 'success']);
+    }
+
+    public function update(Group $group, GroupUpdateRequest $request)
+    {
+        $group->update([
             'group_name' => $request->get('group_name'),
             'owner_id' => $request->get('owner_id'),
         ]);
