@@ -14,7 +14,7 @@ definePageMeta({
             </div>
 
             <div class="list-group">
-                <a v-for="group in groups" href="#"
+                <a v-if="!groups.data" v-for="group in groups" href="#"
                     class="list-group-item list-group-item-action d-flex justify-content-between">
                     <div>
                         <div class="d-flex w-100 justify-content-between">
@@ -113,7 +113,7 @@ definePageMeta({
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-if="!overview.owner_id" @click="store">Save</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-if="!overview.group_id" @click="store">Save</button>
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-else @click="update">Update</button>
                     </div>
                 </div>
